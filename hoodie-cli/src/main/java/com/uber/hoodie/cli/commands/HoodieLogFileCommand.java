@@ -17,7 +17,7 @@
 package com.uber.hoodie.cli.commands;
 
 import com.beust.jcommander.internal.Maps;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.codehaus.jackson.map.ObjectMapper;
 import com.uber.hoodie.cli.HoodieCLI;
 import com.uber.hoodie.cli.HoodiePrintHelper;
 import com.uber.hoodie.cli.TableHeader;

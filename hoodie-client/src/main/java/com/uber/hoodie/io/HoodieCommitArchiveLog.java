@@ -16,8 +16,8 @@
 
 package com.uber.hoodie.io;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.uber.hoodie.avro.model.HoodieArchivedMetaEntry;
@@ -250,7 +250,7 @@ public class HoodieCommitArchiveLog {
       HoodieCommitMetadata hoodieCommitMetadata) {
     ObjectMapper mapper = new ObjectMapper();
     //Need this to ignore other public get() methods
-    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     com.uber.hoodie.avro.model.HoodieCommitMetadata avroMetaData = mapper
         .convertValue(hoodieCommitMetadata, com.uber.hoodie.avro.model.HoodieCommitMetadata.class);
     return avroMetaData;

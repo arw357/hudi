@@ -16,8 +16,6 @@
 
 package com.uber.hoodie.common;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uber.hoodie.avro.MercifulJsonConverter;
 import com.uber.hoodie.common.model.HoodieRecordPayload;
 import com.uber.hoodie.exception.HoodieException;
@@ -32,6 +30,8 @@ import java.util.zip.InflaterInputStream;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.IndexedRecord;
 import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class HoodieJsonPayload implements HoodieRecordPayload<HoodieJsonPayload> {
 
@@ -98,7 +98,7 @@ public class HoodieJsonPayload implements HoodieRecordPayload<HoodieJsonPayload>
     if (!node.has(field)) {
       throw new HoodieException("Field :" + field + " not found in payload => " + node.toString());
     }
-    return node.get(field).textValue();
+    return node.get(field).asText();
   }
 
   public String getRowKey(String keyColumnField) throws IOException {

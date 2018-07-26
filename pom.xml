@@ -116,16 +116,18 @@
     <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
     <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
     <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-    <parquet.version>1.8.1</parquet.version>
+    <parquet.version>1.9.0</parquet.version>
+    <avro.version>1.8.2</avro.version>
     <junit.version>4.11</junit.version>
     <mockito.version>1.9.5</mockito.version>
+    <jackson.version>2.9.6</jackson.version>
     <log4j.version>1.2.17</log4j.version>
-    <cdh.version>5.7.2</cdh.version>
-    <hadoop.version>2.6.0</hadoop.version>
-    <hive.version>1.1.0</hive.version>
+    <!--<cdh.version>5.15.0</cdh.version>-->
+    <hadoop.version>2.7.1</hadoop.version>
+    <hive.version>2.3.2</hive.version>
     <metrics.version>3.1.1</metrics.version>
-    <spark.version>2.1.0</spark.version>
-    <scala.version>2.11.8</scala.version>
+    <spark.version>2.3.1</spark.version>
+    <scala.version>2.11.12</scala.version>
     <scala.libversion>2.11</scala.libversion>
   </properties>
 
@@ -374,7 +376,7 @@
       <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-client</artifactId>
-        <version>${hadoop.version}-cdh${cdh.version}</version>
+        <version>${hadoop.version}</version>
         <scope>provided</scope>
       </dependency>
 
@@ -392,8 +394,14 @@
 
       <dependency>
         <groupId>org.apache.avro</groupId>
+        <artifactId>avro</artifactId>
+        <version>${avro.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.avro</groupId>
         <artifactId>avro-mapred</artifactId>
-        <version>1.7.7</version>
+        <version>${avro.version}</version>
       </dependency>
 
       <!-- we have to stay at <= 16.0, due to issues with HBase client -->
@@ -407,43 +415,43 @@
       <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-common</artifactId>
-        <version>${hadoop.version}-cdh${cdh.version}</version>
+        <version>${hadoop.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-hdfs</artifactId>
-        <version>${hadoop.version}-cdh${cdh.version}</version>
+        <version>${hadoop.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-auth</artifactId>
-        <version>${hadoop.version}-cdh${cdh.version}</version>
+        <version>${hadoop.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.hive</groupId>
         <artifactId>hive-common</artifactId>
-        <version>${hive.version}-cdh${cdh.version}</version>
+        <version>${hive.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-mapreduce-client-core</artifactId>
-        <version>${hadoop.version}-cdh${cdh.version}</version>
+        <version>${hadoop.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-mapreduce-client-common</artifactId>
-        <version>2.6.0-cdh5.7.2</version>
+        <version>${hadoop.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.hive</groupId>
         <artifactId>hive-exec</artifactId>
-        <version>1.1.0-cdh5.7.2</version>
+        <version>${hive.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -458,23 +466,23 @@
       <dependency>
         <groupId>com.twitter</groupId>
         <artifactId>parquet-hadoop-bundle</artifactId>
-        <version>1.5.0-cdh5.7.2</version>
+        <version>${parquet.version}</version>
       </dependency>
       <dependency>
         <groupId>com.twitter</groupId>
         <artifactId>parquet-hive-bundle</artifactId>
-        <version>1.5.0</version>
+        <version>1.10.0</version>
       </dependency>
       <dependency>
-        <groupId>com.twitter</groupId>
+        <groupId>org.apache.parquet</groupId>
         <artifactId>parquet-avro</artifactId>
-        <version>1.5.0-cdh5.7.2</version>
+        <version>${parquet.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.apache.parquet</groupId>
         <artifactId>parquet-hive-bundle</artifactId>
-        <version>1.8.1</version>
+        <version>${parquet.version}</version>
       </dependency>
 
       <dependency>
@@ -499,7 +507,7 @@
       <dependency>
         <groupId>org.apache.avro</groupId>
         <artifactId>avro</artifactId>
-        <version>1.7.6-cdh5.7.2</version>
+        <version>${avro.version}</version>
         <exclusions>
           <exclusion>
             <groupId>org.slf4j</groupId>
@@ -561,7 +569,12 @@
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <version>2.6.0</version>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.jackson</groupId>
@@ -572,18 +585,18 @@
       <dependency>
         <groupId>org.apache.hive</groupId>
         <artifactId>hive-jdbc</artifactId>
-        <version>${hive.version}-cdh${cdh.version}</version>
+        <version>${hive.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.apache.hive</groupId>
         <artifactId>hive-service</artifactId>
-        <version>${hive.version}-cdh${cdh.version}</version>
+        <version>${hive.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.hive</groupId>
         <artifactId>hive-metastore</artifactId>
-        <version>${hive.version}-cdh${cdh.version}</version>
+        <version>${hive.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -600,13 +613,13 @@
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-hdfs</artifactId>
         <classifier>tests</classifier>
-        <version>${hadoop.version}-cdh${cdh.version}</version>
+        <version>${hadoop.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-common</artifactId>
         <classifier>tests</classifier>
-        <version>${hadoop.version}-cdh${cdh.version}</version>
+        <version>${hadoop.version}</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>

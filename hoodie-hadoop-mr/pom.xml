@@ -76,7 +76,7 @@
       <artifactId>parquet-avro</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.twitter</groupId>
+      <groupId>org.apache.parquet</groupId>
       <artifactId>parquet-avro</artifactId>
     </dependency>
     <dependency>
@@ -118,7 +118,7 @@
               <artifactSet>
                 <includes>
                   <include>com.uber.hoodie:hoodie-common</include>
-                  <include>com.twitter:parquet-avro</include>
+                  <include>org.apache.parquet:parquet-avro</include>
                   <include>com.twitter.common:objectsize</include>
                 </includes>
               </artifactSet>

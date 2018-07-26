@@ -16,7 +16,6 @@
 
 package com.uber.hoodie.avro;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +24,7 @@ import java.util.Map;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * Marjority of this is copied from

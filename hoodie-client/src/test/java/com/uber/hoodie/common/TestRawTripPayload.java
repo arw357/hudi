@@ -16,7 +16,7 @@
 
 package com.uber.hoodie.common;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.codehaus.jackson.map.ObjectMapper;
 import com.uber.hoodie.WriteStatus;
 import com.uber.hoodie.avro.MercifulJsonConverter;
 import com.uber.hoodie.common.model.HoodieRecord;
