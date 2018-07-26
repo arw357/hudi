@@ -34,12 +34,12 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import parquet.schema.DecimalMetadata;
-import parquet.schema.GroupType;
-import parquet.schema.MessageType;
-import parquet.schema.OriginalType;
-import parquet.schema.PrimitiveType;
-import parquet.schema.Type;
+import org.apache.parquet.schema.DecimalMetadata;
+import org.apache.parquet.schema.GroupType;
+import org.apache.parquet.schema.MessageType;
+import org.apache.parquet.schema.OriginalType;
+import org.apache.parquet.schema.PrimitiveType;
+import org.apache.parquet.schema.Type;
 
 /**
  * Schema Utilities
@@ -431,7 +431,7 @@ public class SchemaUtil {
       }
     }
     if (lastBlock != null) {
-      return new parquet.avro.AvroSchemaConverter().convert(lastBlock.getSchema());
+      return new org.apache.parquet.avro.AvroSchemaConverter().convert(lastBlock.getSchema());
     }
     return null;
   }

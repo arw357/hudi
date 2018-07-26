@@ -43,9 +43,11 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.hive.ql.exec.SerializationUtilities;
 import org.apache.hadoop.hive.ql.exec.Utilities;
 import org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat;
 import org.apache.hadoop.hive.ql.io.parquet.read.ParquetFilterPredicateConverter;
+import org.apache.hadoop.hive.ql.io.sarg.ConvertAstToSearchArg;
 import org.apache.hadoop.hive.ql.io.sarg.SearchArgument;
 import org.apache.hadoop.hive.ql.io.sarg.SearchArgumentFactory;
 import org.apache.hadoop.hive.ql.plan.TableScanDesc;
@@ -268,8 +270,11 @@ public class HoodieInputFormat extends MapredParquetInputFormat implements Confi
         || columnNamesString.isEmpty()) {
       return null;
     } else {
-      SearchArgument sarg = SearchArgumentFactory
-          .create(Utilities.deserializeExpression(serializedPushdown));
+      SearchArgument sarg = ConvertAstToSearchArg.createFromConf(job);
+      // #todo https://github.com/apache/hive/blob/233884620af67e6af72b60629f799a69f5823eb2/ql/src/java/org/apache/hadoop/hive/ql/io/sarg/ConvertAstToSearchArg.java#L544
+      //SearchArgumentFactory.newBuilder().
+      //    .create(Utilities.deserializeExpression(serializedPushdown));
+
       final Path finalPath = ((FileSplit) split).getPath();
       final ParquetMetadata parquetMetadata = ParquetFileReader.readFooter(job, finalPath);
       final FileMetaData fileMetaData = parquetMetadata.getFileMetaData();
